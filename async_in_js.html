@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Async Example</title>
+</head>
+<body>
+  <h1>Asynchronous Function Example</h1>
+  <button id="fetchButton">Fetch Data</button>
+  <button id="otherButton">Another Button</button>
+  <button id="other2Button">Another 2 Button</button>
+  <div id="result"></div>
+
+  <script>
+    async function fetchData() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve('Data fetched successfully!');
+        }, 2000); // Simulating a 2-second delay
+      });
+    }
+
+	async function fetchData1() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve('Data fetched successfully  1!');
+        }, 6000); // Simulating a 6-second delay
+      });
+    }
+
+	async function fetchData2() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve('Data fetched successfully   2!');
+        }, 12000); // Simulating a 6-second delay
+      });
+    }
+
+
+
+    document.getElementById('fetchButton').addEventListener('click', async () => {
+      const button = document.getElementById('fetchButton');
+      const resultDiv = document.getElementById('result');
+
+      button.disabled = true;
+      resultDiv.textContent = 'Fetching data...';
+
+      try {
+        const result = await fetchData();
+        resultDiv.textContent = result;
+      } catch (error) {
+        resultDiv.textContent = 'An error occurred: ' + error;
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById('otherButton').addEventListener('click', async () => {
+      alert('Another 1 button was clicked!');
+	  const button1 = document.getElementById('otherButton');
+      const resultDiv = document.getElementById('result');
+
+      button1.disabled = true;
+      resultDiv.textContent = 'Fetching data...1';
+
+      try {
+        const result = await fetchData1();
+        resultDiv.textContent = result;
+      } catch (error) {
+        resultDiv.textContent = 'An error occurred: ' + error;
+      } finally {
+        button1.disabled = false;
+      }
+    });
+	
+	document.getElementById('other2Button').addEventListener('click', async () => {
+      alert('Another 2 button was clicked!');
+	  const button2 = document.getElementById('fetchButton');
+      const resultDiv = document.getElementById('result');
+
+      button2.disabled = true;
+      resultDiv.textContent = 'Fetching data...2';
+
+      try {
+        const result = await fetchData2();
+        resultDiv.textContent = result;
+      } catch (error) {
+        resultDiv.textContent = 'An error occurred: ' + error;
+      } finally {
+        button2.disabled = false;
+      }
+    });
+	
+	
+  </script>
+</body>
+</html>
